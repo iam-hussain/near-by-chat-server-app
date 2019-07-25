@@ -25,10 +25,7 @@ var UserSchema = new mongoose.Schema({
     },
 });
 
-// mongoose.plugin(timestamps, {
-//     createdAt: 'created_at',
-//     updatedAt: 'updated_at'
-// });
+mongoose.plugin(timestamps);
 
 
 module.exports = mongoose.model("User", UserSchema);

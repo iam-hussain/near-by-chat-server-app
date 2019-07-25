@@ -17,6 +17,8 @@ const typeDefs = gql `
         phone: String
         password: String
         salt: String
+        updatedAt: String
+        createdAt: String
     }
 
     type Relation {
@@ -24,15 +26,20 @@ const typeDefs = gql `
         relating: User
         related: User
         status: String
+        updatedAt: String
+        createdAt: String
     }
 
     type Query {
         allUser: [User]
         singleUser(id: ID!): User
+        allRelation: [Relation]
+        oneRelation(id: ID!): Relation
     }
 
     type Mutation {
         join(email: String!, phone: String!, password: String!): User
+        makeRelation(relating: String!, related: String!, status: String!): Relation
     }
 
 `;

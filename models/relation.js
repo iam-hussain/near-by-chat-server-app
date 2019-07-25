@@ -17,10 +17,10 @@ var RelationSchema = new mongoose.Schema({
     }
 });
 
-mongoose.plugin(timestamps, {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-});
+// mongoose.plugin(timestamps, {
+//     createdAt: 'created_at',
+//     updatedAt: 'updated_at'
+// });
 
 
 module.exports = mongoose.model("Relation", RelationSchema);
