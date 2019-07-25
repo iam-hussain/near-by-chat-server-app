@@ -1,6 +1,5 @@
 import { AuthenticationError } from 'apollo-server-express';
 import jwt from'jsonwebtoken';
-import { JWT_SECRET_KEY } from '../config';
 
 const context = ({ req }) => {
   try {
@@ -8,10 +7,10 @@ const context = ({ req }) => {
     if ( !authorization ) return undefined;
 
     const token = authorization.split(' ')[1];
-    const decoded = jwt.verify(token, JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, "JWT_SECRET_KEY");
 
     return {
-      loggedInUser: decoded.username
+      loggedInUser: decoded.user_id
     };
 
   } catch (error) {

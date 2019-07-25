@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
+const Schema = mongoose.Schema;
 
 var RelationSchema = new mongoose.Schema({
     relating: {
