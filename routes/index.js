@@ -1,5 +1,8 @@
 var express = require("express");
 var router = express.Router();
+import Relation from '../models/relation'
+import User from '../models/user'
+
 import {
     successResponse,
     errorResponse
@@ -49,5 +52,14 @@ router.get("/join", function (req, res, next) {
 })
 
 
+router.get("/relation", async function(req, res, next){
+
+
+    var Data = await Relation.findById("5d3a260bf0abec088cdc61ba").populate('User');
+    successResponse(res, {
+        Msg: "User Created Sucessfully",
+        data: Data
+    })
+})
 
 module.exports = router;

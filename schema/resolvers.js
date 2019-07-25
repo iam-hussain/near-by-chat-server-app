@@ -22,7 +22,7 @@ const resolvers = {
         },
         oneRelation: (parent, args, context) => {
             var newVar = Relation.findById(args.id).populate('User');
-            console.log(newVar, " ===================== ")
+            console.log(newVar.status, " ===================== ")
             return Relation.findById(args.id).populate('User');
         }
     },

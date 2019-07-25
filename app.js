@@ -18,6 +18,11 @@ import context from './schema/context';
 
 var app = express();
 
+
+var indexRouter = require('./routes/index');
+
+app.use('/', indexRouter);
+
 mongoose.connect("mongodb+srv://nearme:123jahu123@coronam-dxmaq.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
