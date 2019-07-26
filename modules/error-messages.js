@@ -1,6 +1,6 @@
 export const signup = {
-    invalidUsernamePassword: 'Invalid username or password',
-    invalidUsername: 'Invalid username'
+    invalidEmailPassword: 'Invalid email or password',
+    invalidEmail: 'Invalid email'
   };
   
   export const login = {
@@ -10,4 +10,8 @@ export const signup = {
   
   export const auth = {
     failed: 'Failed to authenticate'
+  };
+
+  export const relation = {
+    noRelated: 'requesting user not found'
   };

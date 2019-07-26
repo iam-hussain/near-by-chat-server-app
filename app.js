@@ -23,7 +23,7 @@ var indexRouter = require('./routes/index');
 
 app.use('/', indexRouter);
 
-mongoose.connect("mongodb+srv://nearme:123jahu123@coronam-dxmaq.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
+mongoose.connect("mongodb+srv://auction:12345sjh@cluster0-ry2gc.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

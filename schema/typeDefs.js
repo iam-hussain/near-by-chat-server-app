@@ -6,7 +6,10 @@ const typeDefs = gql `
 
     type Auth {
         id: ID  
-        user_id: String
+        firstName: String
+        lastName: String
+        email: String
+        phone: String
         token: String
     }
     type User {
@@ -38,8 +41,9 @@ const typeDefs = gql `
     }
 
     type Mutation {
-        join(email: String!, phone: String!, password: String!): User
-        makeRelation(relating: String!, related: String!, status: String!): Relation
+        login(email: String!, password:String!): Auth
+        join(email: String!, phone: String!, password: String!): Auth
+        makeRelation(related: String!, status: String!): Relation
     }
 
 `;
