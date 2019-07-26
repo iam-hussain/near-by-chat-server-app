@@ -17,13 +17,10 @@ const resolvers = {
             return User.findById(args.id);
         },
         allRelation: (parent, args, context) => {
-            console.log(Relation.find().populate('User'), " ===================== ")
-            return Relation.find().populate('User');
+            return Relation.find().populate('relating').populate('related');
         },
         oneRelation: (parent, args, context) => {
-            var newVar = Relation.findById(args.id).populate('User');
-            console.log(newVar.status, " ===================== ")
-            return Relation.findById(args.id).populate('User');
+            return Relation.findById(args.id).populate('relating').populate('related');
         }
     },
     Mutation: {

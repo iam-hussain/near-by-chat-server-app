@@ -7,7 +7,7 @@ import {
     successResponse,
     errorResponse
 } from '../modules/common'
-const User = require('../models/user')
+//const User = require('../models/user')
 
 router.get("/", function (req, res, next) {
     successResponse(res, "Welcome to TastyTongue")
@@ -54,8 +54,9 @@ router.get("/join", function (req, res, next) {
 
 router.get("/relation", async function(req, res, next){
 
-
-    var Data = await Relation.findById("5d3a260bf0abec088cdc61ba").populate('User');
+    var DataNew = await Relation.findById("5d3a260bf0abec088cdc61ba")
+    console.log(DataNew)
+    var Data = await Relation.findById("5d3a260bf0abec088cdc61ba").populate('relating').populate('related');
     successResponse(res, {
         Msg: "User Created Sucessfully",
         data: Data
