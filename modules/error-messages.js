@@ -15,3 +15,8 @@ export const signup = {
   export const relation = {
     noRelated: 'requesting user not found'
   };
+
+  export const chat = {
+    noTo: 'chat user not found'
+  };
+  

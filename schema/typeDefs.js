@@ -33,6 +33,18 @@ const typeDefs = gql `
         createdAt: String
     }
 
+    type Messages {
+        author:User
+        body:String
+        attachment:String
+    }
+
+    type Room {
+        id:ID
+        members:[User]
+        messages:[Messages]
+    }
+
     type Query {
         allUser: [User]
         singleUser(id: ID!): User
@@ -43,7 +55,8 @@ const typeDefs = gql `
     type Mutation {
         login(email: String!, password:String!): Auth
         join(email: String!, phone: String!, password: String!): Auth
-        makeRelation(related: String!, status: String!): Relation
+        makeRelation(related: ID!, status: String!): Relation
+        createRoom(to: ID!): Room
     }
 
 `;

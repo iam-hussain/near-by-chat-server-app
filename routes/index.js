@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 import Relation from '../models/relation'
 import User from '../models/user'
+import Chat from '../models/chat'
 
 import {
     successResponse,
@@ -62,5 +63,36 @@ router.get("/relation", async function(req, res, next){
         data: Data
     })
 })
+
+router.get("/chat", async function(req, res, next){
+
+    var chat =  new Chat ({
+        members : ["5d3acca8e429bb271ccdd169","5d3acd7e970f7a196cf315da"],
+        messages : [
+            {
+                author : "5d3acca8e429bb271ccdd169",
+                body : "My MS",
+                attachment: ""
+            },{
+                author : "5d3acd7e970f7a196cf315da",
+                body : "wewewe",
+                attachment: ""
+            }
+        ]
+    })
+
+    chat.save((err, result) => {
+        if (err) {
+            errorResponse(res, err)
+        }
+        successResponse(res, {
+            Msg: "chat Created Sucessfully",
+            data: result
+        })
+    });
+    
+})
+
+
 
 module.exports = router;

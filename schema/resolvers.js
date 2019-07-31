@@ -5,6 +5,7 @@ import {
 
 import User from '../models/user'
 import Relation from '../models/relation'
+import Chat from '../models/chat'
 import * as error from '../modules/error-messages'
 import {
     randomGenerator
@@ -86,6 +87,17 @@ const resolvers = {
                     const relation = await Relation.create(newRelation);
                     return Relation.findById(relation._id).populate('relating').populate('related');
                 }
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        createRoom: async (parent, args, context) => {
+            try {
+                if (!context.id) throw new ForbiddenError(error.auth.failed);
+                if (!args.to) throw new AuthenticationError(error.chat.noTo);
+
+                const newChat = new Chat(args);
+
             } catch (error) {
                 throw new Error(error);
             }

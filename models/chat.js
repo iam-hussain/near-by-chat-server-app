@@ -10,7 +10,6 @@ var conversation = new mongoose.Schema({
     },
     body: String,
     attachment: String,
-    created: {type: Date, default:Date.now}
 });
 
 var ChatSchema = new mongoose.Schema({
