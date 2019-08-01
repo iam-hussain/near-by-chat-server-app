@@ -7,5 +7,5 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - 3000:8088
+      - 4000:8088
     command: npm start

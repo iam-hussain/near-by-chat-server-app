@@ -34,7 +34,7 @@ const typeDefs = gql `
     }
 
     type Messages {
-        author:User
+        author:String
         body:String
         attachment:String
     }

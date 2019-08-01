@@ -85,7 +85,15 @@ router.get("/chat", async function(req, res, next){
         if (err) {
             errorResponse(res, err)
         }
+        //var bewIII = Chat.findById(result._id)
+        //console.log(bewIII)
+        console.log(" === result._id== ", result._id)
+        // res.json(bewIII)
+        // res.end()
+        // return false
+        result = result.populate("members")
         successResponse(res, {
+           
             Msg: "chat Created Sucessfully",
             data: result
         })

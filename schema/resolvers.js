@@ -95,9 +95,15 @@ const resolvers = {
             try {
                 if (!context.id) throw new ForbiddenError(error.auth.failed);
                 if (!args.to) throw new AuthenticationError(error.chat.noTo);
-
-                const newChat = new Chat(args);
-
+                console.log(args)
+                const newChat = new Chat({
+                    members : [context.id, args.to],
+                    messages : []
+                });
+                const createdChat = await Chat.create(newChat);
+                console.log("createdChat._id ===== ", Chat.findById(createdChat._id).populate('members'))
+                return Chat.findById(createdChat._id).populate('members');
+                //return Chat.findById(createdChat._id).populate('members')
             } catch (error) {
                 throw new Error(error);
             }
