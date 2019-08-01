@@ -24,7 +24,15 @@ const resolvers = {
         },
         oneRelation: (parent, args, context) => {
             return Relation.findById(args.id).populate('relating').populate('related');
-        }
+        },
+        allChat: (parent, args, context) => {
+            if (!context.id) throw new ForbiddenError(error.auth.failed);
+            return Chat.find({'members': { $in: "5d43265ad8cc814374cd491a" }}).populate('members').populate('messages.author');
+        },
+        oneChat: (parent, args, context) => {
+            if (!context.id) throw new ForbiddenError(error.auth.failed);
+            return Chat.findById(args.id).populate('members').populate('messages.author');
+        },
     },
     Mutation: {
         login: async (parent, args) => {
@@ -79,9 +87,15 @@ const resolvers = {
                     related: args.related
                 });
                 if (checkUniqueUserStatus) {
-                    const relationUpdate = await Relation.update({_id: checkUniqueUserStatus.id}, {$set: { status: args.status }})
+                    const relationUpdate = await Relation.update({
+                        _id: checkUniqueUserStatus.id
+                    }, {
+                        $set: {
+                            status: args.status
+                        }
+                    })
                     return Relation.findById(checkUniqueUserStatus.id).populate('relating').populate('related');
-                }else{
+                } else {
                     const newRelation = new Relation(args);
                     newRelation.relating = context.id
                     const relation = await Relation.create(newRelation);
@@ -97,13 +111,29 @@ const resolvers = {
                 if (!args.to) throw new AuthenticationError(error.chat.noTo);
                 console.log(args)
                 const newChat = new Chat({
-                    members : [context.id, args.to],
-                    messages : []
+                    members: [context.id, args.to],
+                    messages: []
                 });
                 const createdChat = await Chat.create(newChat);
                 console.log("createdChat._id ===== ", Chat.findById(createdChat._id).populate('members'))
-                return Chat.findById(createdChat._id).populate('members');
-                //return Chat.findById(createdChat._id).populate('members')
+                return Chat.findById(createdChat._id).populate('members').populate('messages.author');
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        sendMessage: async (parent, args, context) => {
+            try {
+                if (!context.id) throw new ForbiddenError(error.auth.failed);
+                if (!args.room) throw new AuthenticationError(error.chat.noRoomID);
+                if (!args.body) throw new AuthenticationError(error.chat.msgEmpty);
+                const messages = {
+                    author: context.id,
+                    body: args.body,
+                    attachment: args.attachment
+                }
+                const chatMsg = await Chat.findOneAndUpdate({_id: args.room }, { $push: { messages: messages } }, {useFindAndModify: false})
+                return Chat.findById(args.room).populate('members').populate('messages.author');
+            
             } catch (error) {
                 throw new Error(error);
             }

@@ -34,7 +34,7 @@ const typeDefs = gql `
     }
 
     type Messages {
-        author:[User]
+        author:User
         body:String
         attachment:String
     }
@@ -50,6 +50,8 @@ const typeDefs = gql `
         singleUser(id: ID!): User
         allRelation: [Relation]
         oneRelation(id: ID!): Relation
+        allChat: [Room]
+        oneChat(id:ID!): Room
     }
 
     type Mutation {
@@ -57,7 +59,7 @@ const typeDefs = gql `
         join(email: String!, phone: String!, password: String!): Auth
         makeRelation(related: ID!, status: String!): Relation
         createRoom(to: ID!): Room
-        sendMessage(room: ID!, body: String!, attachment:String!)
+        sendMessage(room: ID!, body: String!, attachment:String!): Room
     }
 
 `;

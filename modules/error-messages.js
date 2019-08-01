@@ -17,6 +17,8 @@ export const signup = {
   };
 
   export const chat = {
-    noTo: 'chat user not found'
+    noTo: 'chat user not found',
+    noRoomID: "No room ID Found",
+    msgEmpty: "Message is empty"
   };
   
