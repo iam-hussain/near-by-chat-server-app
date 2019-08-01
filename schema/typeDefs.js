@@ -34,7 +34,7 @@ const typeDefs = gql `
     }
 
     type Messages {
-        author:String
+        author:[User]
         body:String
         attachment:String
     }
@@ -57,6 +57,7 @@ const typeDefs = gql `
         join(email: String!, phone: String!, password: String!): Auth
         makeRelation(related: ID!, status: String!): Relation
         createRoom(to: ID!): Room
+        sendMessage(room: ID!, body: String!, attachment:String!)
     }
 
 `;
